@@ -1,0 +1,815 @@
+
+/* =====================================
+   ОБЩИЕ НАСТРОЙКИ
+===================================== */
+
+:root {
+    --bg: #090c11;
+    --panel: #111720;
+    --panel-light: #19222e;
+    --text: #f3f5f8;
+    --muted: #a5b0bd;
+    --line: #2b3542;
+    --gold: #e9b75e;
+    --red: #ee6565;
+    --green: #67d3ac;
+    --blue: #80b9ff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 25px;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.7;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+/* =====================================
+   ПЕРВЫЙ ЭКРАН
+===================================== */
+
+.hero {
+    min-height: 650px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px 7% 80px;
+
+    background:
+        radial-gradient(
+            circle at 80% 45%,
+            rgba(233, 183, 94, 0.12),
+            transparent 32%
+        ),
+        linear-gradient(135deg, #111720, #090c11 70%);
+    border-bottom: 1px solid var(--line);
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 460px;
+    height: 460px;
+    right: -150px;
+    bottom: -200px;
+    border: 1px solid rgba(233, 183, 94, 0.22);
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 35px rgba(233, 183, 94, 0.025),
+        0 0 0 75px rgba(233, 183, 94, 0.025);
+    pointer-events: none;
+}
+
+.navigation {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--line);
+}
+
+.navigation a {
+    color: var(--muted);
+    font-size: 0.86rem;
+    transition: color 0.25s ease;
+}
+
+.navigation a:hover {
+    color: var(--gold);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 850px;
+    margin: auto 0;
+    padding: 65px 0 35px;
+    animation: appear 0.8s ease both;
+}
+
+.eyebrow {
+    color: var(--gold);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.19em;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    margin: 22px 0;
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.98;
+    letter-spacing: -0.065em;
+}
+
+.hero-description {
+    max-width: 610px;
+    color: var(--muted);
+    font-size: 1.08rem;
+}
+
+.hero-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: 25px;
+    padding: 13px 20px;
+    border: 1px solid var(--gold);
+    border-radius: 5px;
+    color: var(--gold);
+    font-weight: 700;
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.hero-button:hover {
+    background: var(--gold);
+    color: #101318;
+    transform: translateY(-3px);
+}
+
+.hero-button span {
+    font-size: 1.2rem;
+}
+
+.hero-number {
+    position: absolute;
+    right: 7%;
+    bottom: 15px;
+    color: rgba(255, 255, 255, 0.035);
+    font-size: clamp(10rem, 25vw, 22rem);
+    font-weight: 900;
+    line-height: 1;
+    pointer-events: none;
+}
+
+/* =====================================
+   ОСНОВНОЙ КОНТЕЙНЕР И СЕКЦИИ
+===================================== */
+
+.container {
+    width: min(1400px, 100%);
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.section {
+    padding: 90px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.section-heading {
+    max-width: 850px;
+    margin-bottom: 35px;
+}
+
+.section-heading h2,
+.conclusion h2 {
+    margin: 10px 0 18px;
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    line-height: 1.12;
+    letter-spacing: -0.045em;
+}
+
+.section-description {
+    max-width: 850px;
+    color: var(--muted);
+}
+
+/* =====================================
+   КРАТКАЯ СТАТИСТИКА
+===================================== */
+
+.quick-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 35px;
+}
+
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 25px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    transition:
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.stat-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+}
+
+.stat-label {
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.stat-card strong {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    letter-spacing: -0.04em;
+}
+
+.stat-card > span:last-child {
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+/* =====================================
+   КАРТОЧКИ АВТОМОБИЛЕЙ
+===================================== */
+
+.car-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+}
+
+.car-card {
+    overflow: hidden;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.car-card:hover {
+    transform: translateY(-6px);
+    border-color: #566171;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+}
+
+.car-figure {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    background: #202833;
+}
+
+.car-figure img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.car-card:hover .car-figure img {
+    transform: scale(1.045);
+}
+
+.car-figure figcaption {
+    position: absolute;
+    left: 15px;
+    bottom: 15px;
+    padding: 6px 11px;
+    background: rgba(9, 12, 17, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 0.76rem;
+    letter-spacing: 0.08em;
+}
+
+.car-info {
+    padding: 24px;
+}
+
+.car-index {
+    color: var(--muted);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.car-info h3 {
+    margin: 10px 0 15px;
+    font-size: 1.65rem;
+    line-height: 1.2;
+}
+
+.car-info > p:not(.car-index) {
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+.mini-specs {
+    padding: 0;
+    margin: 25px 0;
+    list-style: none;
+}
+
+.mini-specs li {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.85rem;
+}
+
+.mini-specs li span {
+    color: var(--muted);
+}
+
+.mini-specs li strong {
+    text-align: right;
+}
+
+.mercedes-card .car-index {
+    color: var(--gold);
+}
+
+.tesla-card .car-index {
+    color: var(--green);
+}
+
+.bmw-card .car-index {
+    color: var(--blue);
+}
+
+/* =====================================
+   ДОПОЛНИТЕЛЬНЫЕ ФАКТЫ
+===================================== */
+
+.fact-box {
+    margin-top: 20px;
+    padding: 16px;
+    background: var(--panel-light);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+}
+
+.fact-box strong {
+    color: var(--gold);
+    font-size: 0.9rem;
+}
+
+.fact-box p {
+    margin: 7px 0 0;
+    color: var(--muted);
+    font-size: 0.84rem;
+}
+
+/* =====================================
+   ТАБЛИЦА
+===================================== */
+
+.table-section {
+    padding-bottom: 80px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    background: var(--panel);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.2);
+}
+
+table {
+    width: 100%;
+    min-width: 950px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+caption {
+    padding: 20px;
+    background: #0e141c;
+    color: var(--muted);
+    text-align: left;
+    font-size: 0.88rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.feature-column {
+    width: 21%;
+}
+
+.vehicle-column {
+    width: 26.33%;
+}
+
+thead th {
+    padding: 20px 16px;
+    background: #1b2430;
+    text-align: left;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.th-mercedes {
+    color: var(--gold);
+}
+
+.th-tesla {
+    color: var(--green);
+}
+
+.th-bmw {
+    color: var(--blue);
+}
+
+tbody th,
+tbody td,
+tfoot th,
+tfoot td {
+    padding: 16px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--line);
+    overflow-wrap: anywhere;
+    font-size: 0.87rem;
+}
+
+tbody th {
+    color: #f3f5f8;
+    font-weight: 700;
+}
+
+tbody td,
+tfoot td {
+    color: #c4ced9;
+}
+
+tbody tr {
+    transition: background 0.2s ease;
+}
+
+tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.025);
+}
+
+tbody tr:hover {
+    background: rgba(233, 183, 94, 0.075);
+}
+
+tfoot th,
+tfoot td {
+    background: #1b2430;
+    border-bottom: none;
+}
+
+tfoot th {
+    color: var(--gold);
+}
+
+mark {
+    padding: 3px 7px;
+    border-radius: 4px;
+    background: rgba(233, 183, 94, 0.18);
+    color: #ffd98d;
+    font-weight: 800;
+}
+
+.table-note {
+    margin-top: 20px;
+    color: var(--muted);
+    font-size: 0.82rem;
+}
+
+/* =====================================
+   РАСКРЫВАЮЩИЕСЯ БЛОКИ
+===================================== */
+
+.details-list {
+    display: grid;
+    gap: 12px;
+}
+
+details {
+    padding: 20px 22px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    transition: border-color 0.25s ease;
+}
+
+details:hover {
+    border-color: var(--gold);
+}
+
+summary {
+    color: var(--text);
+    font-weight: 750;
+    cursor: pointer;
+}
+
+summary::marker {
+    color: var(--gold);
+}
+
+details p {
+    margin-bottom: 0;
+    color: var(--muted);
+}
+
+/* =====================================
+   БЕЗОПАСНОСТЬ И PROGRESS
+===================================== */
+
+.safety-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 30px;
+}
+
+.safety-card {
+    padding: 25px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+}
+
+.safety-symbol {
+    color: var(--gold);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.safety-card h3 {
+    margin: 8px 0;
+    font-size: 1.7rem;
+}
+
+.safety-card p {
+    min-height: 100px;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.safety-card progress {
+    width: 100%;
+    height: 7px;
+    accent-color: var(--gold);
+}
+
+.safety-card small {
+    display: block;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.75rem;
+}
+
+/* =====================================
+   ЦИТАТА
+===================================== */
+
+blockquote {
+    margin: 35px 0 0;
+    padding: 28px 30px;
+    background: var(--panel-light);
+    border-left: 4px solid var(--gold);
+    color: #e5e9ef;
+    font-size: 1.15rem;
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-style: normal;
+}
+
+/* =====================================
+   ЗАКЛЮЧЕНИЕ
+===================================== */
+
+.conclusion {
+    padding-bottom: 100px;
+    border-bottom: none;
+}
+
+.conclusion-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 30px;
+}
+
+.conclusion-grid > div {
+    padding: 23px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+.conclusion-grid h3 {
+    color: var(--gold);
+    font-size: 1.15rem;
+}
+
+.conclusion-grid p {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.final-text {
+    margin-top: 35px;
+    padding: 25px;
+    background: rgba(233, 183, 94, 0.07);
+    border: 1px solid rgba(233, 183, 94, 0.3);
+    border-radius: 10px;
+}
+
+.updated {
+    color: var(--muted);
+    font-size: 0.8rem;
+}
+
+.back-to-top {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 16px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    color: var(--gold);
+    transition: background 0.2s ease;
+}
+
+.back-to-top:hover {
+    background: var(--panel-light);
+}
+
+/* =====================================
+   ПОДВАЛ
+===================================== */
+
+.footer {
+    padding: 25px 5%;
+    background: #07090d;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+}
+
+/* =====================================
+   АНИМАЦИЯ
+===================================== */
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =====================================
+   АДАПТАЦИЯ ДЛЯ ПЛАНШЕТОВ
+===================================== */
+
+@media (max-width: 1000px) {
+    .car-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .car-card:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .car-card:last-child .car-figure img {
+        height: 300px;
+    }
+
+    .safety-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .safety-card p {
+        min-height: 0;
+    }
+
+    .navigation {
+        gap: 16px;
+    }
+}
+
+/* =====================================
+   АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ
+===================================== */
+
+@media (max-width: 650px) {
+    .hero {
+        min-height: 600px;
+        padding: 18px 6% 55px;
+    }
+
+    .navigation {
+        justify-content: flex-start;
+        gap: 12px 18px;
+    }
+
+    .navigation a {
+        font-size: 0.78rem;
+    }
+
+    .hero-content {
+        padding-top: 55px;
+    }
+
+    .hero h1 {
+        font-size: clamp(2.7rem, 12vw, 4.5rem);
+    }
+
+    .container {
+        padding: 0 5%;
+    }
+
+    .section {
+        padding: 60px 0;
+    }
+
+    .quick-stats,
+    .car-grid,
+    .conclusion-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .car-card:last-child {
+        grid-column: auto;
+    }
+
+    .car-card:last-child .car-figure img,
+    .car-figure img {
+        height: 230px;
+    }
+
+    .stat-card {
+        padding: 20px;
+    }
+
+    .section-heading h2,
+    .conclusion h2 {
+        font-size: 2.1rem;
+    }
+
+    blockquote {
+        padding: 20px;
+        font-size: 1rem;
+    }
+
+    .hero-number {
+        right: 0;
+        bottom: 10px;
+    }
+}
+
+/* Учитываем настройки уменьшения анимации */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
